@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Droopy I Fast build Admin dashboard for any platform</title>
+	<meta name="description" content="Droopy is a Dashboard & Admin Site Responsive Template by hence work." />
+	<meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Droopy Admin, Droopy admin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
+	<meta name="author" content="hence-work"/>
+	
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="{{ url_for('static', filename='weather.ico') }}">
+	<link rel="icon" href="{{ url_for('static', filename='weather.ico') }}" type="image/x-icon">
+   
+	<!-- Bootstrap CSS -->
+	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+   
+	<!-- Custom CSS -->
+	<link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css">
+   
+	<!-- Jasny Bootstrap CSS -->
+	<link href="{{ url_for('static', filename='css/jasny-bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+
+
+</head>
+
+<body>
+	<!--Preloader-->
+	<div class="preloader-it">
+		<div class="la-anim-1"></div>
+	</div>
+	<!--/Preloader-->
+    <div class="wrapper  theme-1-active primary-color-green">
+		<!-- Top Menu Items -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="mobile-only-brand pull-left">
+				<div class="nav-header pull-left">
+					<div class="logo-wrap">
+						<a href="index.html">
+							<img class="brand-img"src="{{ url_for('static', filename='img/logo.png') }}" alt="brand"/>
+							<span class="brand-text">Droopy</span>
+						</a>
+					</div>
+				</div>	
+				<a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block ml-20 pull-left" href="javascript:void(0);"><i class="zmdi zmdi-menu"></i></a>
+				<a id="toggle_mobile_search" data-toggle="collapse" data-target="#search_form" class="mobile-only-view" href="javascript:void(0);"><i class="zmdi zmdi-search"></i></a>
+				<a id="toggle_mobile_nav" class="mobile-only-view" href="javascript:void(0);"><i class="zmdi zmdi-more"></i></a>
+							
+										<form action="/submit" method="POST">
+											<div class="form-group">
+												<div class="d-flex" style="display:flex;justify-content:space-between; margin-top:10px" >
+													<div class="col-lg-8 col-md-8 col-xs-8 mt-8">
+															<input type="text" id="example-input1-group2" name="example-input1-group2" class="form-control" placeholder="Search">
+													</div>
+													<div class="col-lg-4 col-md-4 col-xs-4">
+														<button aria-expanded="false" type="submit" class="btn btn-primary">
+															<span>Add City</span>
+														</button>
+													</div>
+												</div>
+											</div>
+										</form>
+
+			</div>
+				
+		</nav>
+		<!-- /Top Menu Items -->
+		
+		
+		<!-- /Left Sidebar Menu -->
+		
+		<!-- Right Sidebar Menu -->
+		<div class="fixed-sidebar-right">
+			<ul class="right-sidebar">
+				<li>
+					<div  class="tab-struct custom-tab-1">
+						
+						
+						<div class="tab-content" id="right_sidebar_content">
+							<div  id="chat_tab" class="tab-pane fade active in" role="tabpanel">
+								<div class="chat-cmplt-wrap">
+									<div class="chat-box-wrap">
+										<div class="add-friend">
+											<a href="javascript:void(0)" class="inline-block txt-grey">
+												<i class="zmdi zmdi-more"></i>
+											</a>	
+											<span class="inline-block txt-dark">users</span>
+											<a href="javascript:void(0)" class="inline-block text-right txt-grey"><i class="zmdi zmdi-plus"></i></a>
+											<div class="clearfix"></div>
+										</div>
+										
+										
+									</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!-- /Right Sidebar Menu -->
+		
+		
+		
+		<!-- Right Sidebar Backdrop -->
+		<div class="right-sidebar-backdrop"></div>
+		<!-- /Right Sidebar Backdrop -->
+		
+        <!-- Main Content -->
+		<div class="page-wrapper">
+            <div class="container-fluid">
+				<!-- Title -->
+				
+				<!-- /Title -->
+				
+				<!-- Row -->
+                <div class="row">
+                	<div class="col-lg-5 col-xs-12">
+                        <div id="weather_1" class="panel panel-default card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<div class="container mt-5">
+										<form action="/submit" method="POST">
+											<div class="form-group">
+												<div class="d-flex">
+													<div class="col-lg-3.5 col-md-2 col-xs-4 mt-3">
+														<select class="form-control" name="city_select" id="city_select">
+															<option value="Nuweraliya">Nuweraliya</option>
+															<option value="Kurunagal">Kurunagal</option>
+															<option value="Colombo">Colombo</option>
+															<option value="Tokyo">Tokyo</option>
+															<option value="Los Angeles">Los Angeles</option>
+															<option value="Singapore">Singapore</option>
+														</select>
+													</div>
+													<div class="col-lg-6 col-md-6 col-xs-8">
+														<button aria-expanded="false" type="submit" class="btn btn-success">
+															<span>Get Weather</span>
+														</button>
+													</div>
+										
+												</div>
+											</div>
+										</form>
+										
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<h6 class="block nowday">Sunday</h6>
+									<span class="block nowdate">13/10/2023</span>
+									<span class="block nowdate">No weather datas available</span>
+									<span class="block nowtime">12.10</span><hr/>
+									<div class="weather weatherapp mt-15">
+										<span class="block nowdate" style='justify-content:space-between;display:flex;'<p> Wind    :8.31m/s</p><p>humidity :77%</p>  </span>
+										<span class="block nowtime"></span><hr/>
+									</div>
+									<div class="weather weather-app mt-15">
+										<img
+											src="{{ url_for('static', filename='img/cloudy.png') }}"
+											alt="weather"
+											style="width: 50px; height: 50px"
+										/>
+										
+										<img
+											src="{{ url_for('static', filename='img/cloudy.png') }}"
+											alt="weather"
+											style="width: 50px; height: 50px"
+										/>
+										
+										<img
+											src="{{ url_for('static', filename='img/cloudy.png') }}"
+											alt="weather"
+											style="width: 50px; height: 50px"
+										/>
+										<img
+											src="{{ url_for('static', filename='img/cloudy.png') }}"
+											alt="weather"
+											style="width: 50px; height: 50px"
+										/>
+										<img
+											src="{{ url_for('static', filename='img/cloudy.png') }}"
+											alt="weather"
+											style="width: 50px; height: 50px"
+										/>
+										<img
+											src="{{ url_for('static', filename='img/cloudy.png') }}"
+											alt="weather"
+											style="width: 50px; height: 50px"
+										/>
+										<img
+										src="{{ url_for('static', filename='img/cloudy.png') }}"
+										alt="weather"
+										style="width: 50px; height: 50px"
+										/>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<div class="col-lg-7 col-xs-12">
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+							<div id="weather_3" class="panel panel-default card-view pa-0 weather-info">
+								<div class="panel-wrapper collapse in">
+									<div class="panel-body pa-0">
+										<div class="row ma-0">
+											<div class="col-xs-6 pa-0">
+												<div class="left-block-wrap pa-30">
+													<p class="block nowday">Sun</p>
+													<span class="block nowdate">13/10/2023</span>
+													<div class="left-block  mt-15">
+														<h4 class="block temp">27.5 <sup>.</sup>C</h4>
+													</div>
+												</div>
+											</div>
+											<div class="col-xs-6 pa-0">
+												<div class="right-block-wrap pa-30">
+													<div class="right-block">
+														<img
+															src="{{ url_for('static', filename='img/cloudy.png') }}"
+															alt="weather"
+															style="width: 80px; height: 80px"
+														  />
+														  <h5>Colombo</h5>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div id="weather_4" class="panel panel-default card-view pa-0 weather-warning">
+									<div class="panel-wrapper collapse in">
+										<div class="panel-body pa-0">
+											<div class="row ma-0">
+												<div class="col-xs-6 pa-0">
+													<div class="left-block-wrap pa-30">
+														<p class="block nowday">Sun</p>
+														<span class="block nowdate">13/10/2023</span>
+														<div class="left-block  mt-15">4
+															<h4 class="block temp">27.5 <sup>.</sup>C</h4>
+														</div>
+													</div>
+												</div>
+												<div class="col-xs-6 pa-0">
+													<div class="right-block-wrap pa-30">
+														<div class="right-block">
+															<img
+															
+															src="{{ url_for('static', filename='img/weather.png') }}"
+															alt="weather"
+															style="width: 80px; height: 80px"
+														  />
+														  <h5>Colombo</h5>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div id="weather_5" class="panel panel-default card-view pa-0 weather-danger">
+									<div class="panel-wrapper collapse in">
+										<div class="panel-body pa-0">
+											<div class="row ma-0">
+												<div class="col-xs-6 pa-0">
+													<div class="left-block-wrap pa-30">
+														<p class="block nowday">Sun</p>
+														<span class="block nowdate">13/10/2023</span>
+														<div class="left-block  mt-15">
+															<h4 class="block temp">27.5 <sup>.</sup>C</h4>
+														</div>
+													</div>
+												</div>
+												<div class="col-xs-6 pa-0">
+													<div class="right-block-wrap pa-30">
+														<div class="right-block">
+															<img
+															
+															src="{{ url_for('static', filename='img/storm.png') }}"
+															alt="weather"
+															style="width: 80px; height: 80px"
+														  />
+														  <h5>Colombo</h5>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div id="weather_2" class="panel panel-default card-view pa-0 weather-inverse">
+									<div class="panel-wrapper collapse in">
+										<div class="panel-body pa-0">
+											<div class="row ma-0">
+												<div class="col-xs-6 pa-0">
+													<div class="left-block-wrap pa-30">
+														<p class="block nowday">sat</p>
+														<span class="block nowdate">10/12/2024</span>
+														<div class="left-block  mt-15">
+															<h4 class="block temp">27.5 <sup>.</sup>C</h4>
+														</div>
+													</div>
+												</div>
+												<div class="col-xs-6 pa-0">
+													<div class="right-block-wrap pa-30">
+														<div class="right-block">
+															<img
+															src="{{ url_for('static', filename='img/weather.png') }}"
+															alt="weather"
+															style="width: 80px; height: 80px"
+														  />
+														  <h5>Colombo</h5>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /Row -->
+				
+			</div>	
+			<!-- Footer -->
+			<footer class="footer container-fluid pl-30 pr-30">
+				<div class="row">
+					<div class="col-sm-12">
+						<p>2018 &copy; Droopy. Pampered by Hencework</p>
+					</div>
+				</div>
+			</footer>
+			<!-- /Footer -->
+        </div>
+        <!-- /Main Content -->
+
+    </div>
+    <!-- /#wrapper -->
+	
+	<!-- JavaScript -->
+	
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- Jasny Bootstrap JS -->
+    <script src="{{ url_for('static', filename='js/jasny-bootstrap.min.js') }}"></script>
+    <!-- Slimscroll JavaScript -->
+    <script src="{{ url_for('static', filename='js/jquery.slimscroll.js') }}"></script>
+    <!-- Init JavaScript -->
+    <script src="{{ url_for('static', filename='js/init.js') }}"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

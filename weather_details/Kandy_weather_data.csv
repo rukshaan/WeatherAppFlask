@@ -1,0 +1,8 @@
+Date,AvgTemp,Humidity,WindSpeed,Precipitation,Condition
+2025-03-08,23.1,67,7.9,0.0,Sunny
+2025-03-09,22.1,60,6.8,0.0,Sunny
+2025-03-10,22.1,82,9.4,11.24,Moderate or heavy rain shower
+2025-03-11,22.9,91,6.1,76.35,Torrential rain shower
+2025-03-12,23.4,82,6.1,1.87,Light rain shower
+2025-03-13,23.9,77,5.0,1.06,Patchy rain possible
+2025-03-14,23.9,78,3.6,0.24,Patchy rain possible

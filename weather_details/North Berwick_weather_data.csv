@@ -1,0 +1,8 @@
+Date,AvgTemp,Humidity,WindSpeed,Precipitation,Condition
+2025-03-12,3.7,54,14.8,0.0,Sunny
+2025-03-13,1.7,71,11.2,0.0,Overcast
+2025-03-14,2.4,86,10.8,0.0,Overcast
+2025-03-15,3.4,94,15.5,0.0,Fog
+2025-03-16,8.3,97,24.5,0.0,Fog
+2025-03-17,10.0,96,23.8,54.59,Heavy rain
+2025-03-18,5.7,57,15.5,0.0,Overcast
