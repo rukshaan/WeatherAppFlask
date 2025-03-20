@@ -1,6 +1,6 @@
 python -m venv flask_env
 .\flask_env\Scripts\activate
-pip install flask migrate
+pip install Flask_Migrate
 pip install dotenv
 pip install flask-login
 pip install psycopg2 
