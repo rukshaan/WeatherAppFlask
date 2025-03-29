@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Animated Map with Search</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        body { background-color: #0c0c1d; color: white; text-align: center; font-family: Arial, sans-serif; }
+        svg { width: 100%; height: 600px; }
+
+        /* Search Box */
+        .search-container {
+            margin: 10px;
+        }
+        input {
+            padding: 8px;
+            width: 200px;
+            font-size: 16px;
+        }
+        button {
+            padding: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Expanding Circle */
+        .pulse { fill: none; stroke: red; stroke-width: 2; opacity: 0.5; }
+        @keyframes expand {
+            0% { r: 2; opacity: 1; }
+            100% { r: 20; opacity: 0; }
+        }
+
+        /* Dotted Line Animation */
+        .dotted-line {
+            fill: none;
+            stroke: white;
+            stroke-width: 2;
+            stroke-dasharray: 4,4;
+            stroke-dashoffset: 20;
+            animation: moveDashes 2s linear infinite;
+        }
+        @keyframes moveDashes {
+            100% { stroke-dashoffset: 0; }
+        }
+
+        /* Location Marker */
+        .marker { fill: red; stroke: white; stroke-width: 1.5; }
+
+        /* Highlighted Marker */
+        .highlight {
+            fill: yellow;
+            stroke: white;
+            stroke-width: 3;
+            animation: glow 1s infinite alternate;
+        }
+
+        @keyframes glow {
+            0% { r: 6; opacity: 1; }
+            100% { r: 10; opacity: 0.8; }
+        }
+    </style>
+</head>
+<body>
+    <h2>Search and Add New City to the Map</h2>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Enter country or city name..." />
+        <button onclick="addNewCity()">Add City</button>
+    </div>
+
+    <svg id="map"></svg>
+
+    <script>
+        const width = window.innerWidth, height = 600;
+        const svg = d3.select("#map").attr("width", width).attr("height", height);
+        const projection = d3.geoMercator().center([0, 20]).scale(150).translate([width / 2, height / 2]);
+        const path = d3.geoPath().projection(projection);
+
+        const sriLanka = projection([80.7718, 7.8731]);
+
+        // Hardcoded list of country names and their coordinates (for demonstration)
+        const locations = [
+            { name: "India", coords: projection([78.9629, 20.5937]) },
+            { name: "United Kingdom", coords: projection([-3.4360, 55.3781]) },
+            { name: "United States", coords: projection([-95.7129, 37.0902]) },
+            { name: "Canada", coords: projection([-106.3468, 56.1304]) },
+            { name: "South Africa", coords: projection([25.0000, -18.0000]) },
+            { name: "Australia", coords: projection([133.7751, -25.2744]) },
+            { name: "Germany", coords: projection([10.4515, 51.1657]) }
+        ];
+
+        d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson").then(function(world) {
+            svg.selectAll("path")
+                .data(world.features)
+                .enter().append("path")
+                .attr("d", path)
+                .attr("fill", "#1a1a2e")
+                .attr("stroke", "#333");
+
+            function createPulse() {
+                svg.append("circle")
+                    .attr("class", "pulse")
+                    .attr("cx", sriLanka[0])
+                    .attr("cy", sriLanka[1])
+                    .attr("r", 2)
+                    .style("animation", "expand 1.5s ease-out infinite");
+            }
+
+            function animateLines() {
+                // Add lines and markers for countries
+                locations.forEach(dest => {
+                    svg.append("line")
+                        .attr("class", "dotted-line")
+                        .attr("x1", sriLanka[0])
+                        .attr("y1", sriLanka[1])
+                        .attr("x2", dest.coords[0])
+                        .attr("y2", dest.coords[1]);
+
+                    // Add location markers 📍
+                    svg.append("circle")
+                        .attr("class", "marker")
+                        .attr("id", `marker-${dest.name}`)
+                        .attr("cx", dest.coords[0])
+                        .attr("cy", dest.coords[1])
+                        .attr("r", 5);
+
+                    // Add country labels
+                    svg.append("text")
+                        .attr("x", dest.coords[0] + 7)
+                        .attr("y", dest.coords[1] - 7)
+                        .attr("fill", "white")
+                        .attr("font-size", "12px")
+                        .text(dest.name);
+                });
+            }
+
+            setInterval(createPulse, 1000);
+            animateLines();
+        });
+
+        function addNewCity() {
+            const cityName = document.getElementById("searchInput").value.trim().toLowerCase();
+            const newCity = getCityCoordinates(cityName);
+
+            // Check if the city exists in the list
+            if (newCity) {
+                // Add the new city to the locations array and update the map
+                locations.push(newCity);
+                svg.append("circle")
+                    .attr("class", "marker highlight")
+                    .attr("id", `marker-${newCity.name}`)
+                    .attr("cx", newCity.coords[0])
+                    .attr("cy", newCity.coords[1])
+                    .attr("r", 7);
+
+                svg.append("line")
+                    .attr("class", "dotted-line")
+                    .attr("x1", sriLanka[0])
+                    .attr("y1", sriLanka[1])
+                    .attr("x2", newCity.coords[0])
+                    .attr("y2", newCity.coords[1]);
+
+                svg.append("text")
+                    .attr("x", newCity.coords[0] + 7)
+                    .attr("y", newCity.coords[1] - 7)
+                    .attr("fill", "white")
+                    .attr("font-size", "12px")
+                    .text(newCity.name);
+            } else {
+                alert("City not found or coordinates unavailable.");
+            }
+        }
+
+        function getCityCoordinates(cityName) {
+            // You can extend this list or fetch real coordinates from a database/API
+            const cityCoordinates = {
+                "paris": projection([2.3522, 48.8566]),
+                "new york": projection([-74.0060, 40.7128]),
+                "tokyo": projection([139.6917, 35.6762]),
+                "beijing": projection([116.4074, 39.9042]),
+                "delhi": projection([77.2090, 28.6139])
+            };
+
+            if (cityCoordinates[cityName]) {
+                return { name: capitalize(cityName), coords: cityCoordinates[cityName] };
+            } else {
+                return null;
+            }
+        }
+
+        // Capitalize city names for display
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+    </script>
+</body>
+</html>
